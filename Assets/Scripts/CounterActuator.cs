@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
-public class TimerController : MonoBehaviour, IPointerClickHandler
+public class CounterActuator : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private Timer _timer;
+    [FormerlySerializedAs("_timer")] [SerializeField] private Counter _counter;
     
     private WaitForSeconds _timerDelay;
     private bool _isActive;
@@ -25,7 +26,7 @@ public class TimerController : MonoBehaviour, IPointerClickHandler
     {
         while (_isActive)
         {
-            _timer.Increase();
+            _counter.Increase();
 
             yield return _timerDelay;
         }

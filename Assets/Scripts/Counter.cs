@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class Timer : MonoBehaviour
+public class Counter : MonoBehaviour
 {
     [SerializeField] private TMP_Text _textMashPro;
 
