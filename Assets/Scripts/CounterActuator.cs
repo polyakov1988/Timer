@@ -1,11 +1,10 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
 public class CounterActuator : MonoBehaviour, IPointerClickHandler
 {
-    [FormerlySerializedAs("_timer")] [SerializeField] private Counter _counter;
+    [SerializeField] private Counter _counter;
     
     private WaitForSeconds _timerDelay;
     private bool _isActive;
@@ -17,12 +16,29 @@ public class CounterActuator : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        _isActive = !_isActive;
+        if (_isActive == false)
+        {
+            Run();
+        }
+        else
+        {
+            Pause();
+        }
+    }
+
+    private void Run()
+    {
+        _isActive = true;
         
-        StartCoroutine(StartTimer());
+        StartCoroutine(Countdown());
     }
     
-    private IEnumerator StartTimer()
+    private void Pause()
+    {
+        _isActive = false;
+    }
+    
+    private IEnumerator Countdown()
     {
         while (_isActive)
         {
